@@ -1,0 +1,215 @@
+:root {
+  --bg: #0c0e11;
+  --panel: #14171c;
+  --panel-raised: #1a1e25;
+  --canvas: #101318;
+  --hover: #22262e;
+  --border: #2b3039;
+  --border-subtle: #22262d;
+  --text: #eff1f5;
+  --muted: #8e96a4;
+  --muted-2: #59616c;
+  --accent: #f4d35e;
+  --accent-text: #1a1810;
+  --input: #171b21;
+  --focus: rgba(244, 211, 94, 0.22);
+  --shadow: rgba(0, 0, 0, 0.24);
+  --rad: 8px;
+  --left: 248px;
+  --right: 288px;
+  --top: 64px;
+  --bottom: 31px;
+}
+html[data-ui-theme="light"] {
+  color-scheme: light;
+  --bg: #f2f3f5;
+  --panel: #ffffff;
+  --panel-raised: #fafafb;
+  --canvas: #ebeef2;
+  --hover: #f3f4f6;
+  --border: #d8dde3;
+  --border-subtle: #e7e9ee;
+  --text: #1d2229;
+  --muted: #677384;
+  --muted-2: #9da6b2;
+  --input: #f7f8fa;
+  --focus: rgba(198, 154, 5, 0.18);
+  --shadow: rgba(57, 65, 78, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+}
+body {
+  overflow: hidden;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hide {
+  display: none !important;
+}
+
+.btn {
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        padding: 8px 12px;
+        white-space: nowrap;
+        font-weight: 650;
+      }
+
+.icon-btn {
+        width: 33px;
+        height: 33px;
+        display: inline-grid;
+        place-items: center;
+        border: 1px solid transparent;
+        border-radius: 7px;
+        background: transparent;
+        color: var(--muted);
+      }
+      .icon-btn:hover {
+        background: var(--hover);
+        color: var(--text);
+      }
+      .icon-btn.active {
+        background: var(--hover);
+        color: var(--accent);
+      }
+
+      .view-btn {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        border-radius: 5px;
+        display: grid;
+        place-items: center;
+        width: 31px;
+        height: 27px;
+      }
+
+.app {
+  height: 100dvh;
+  min-height: 400px;
+  display: grid;
+  grid-template-rows: var(--top) minmax(0, 1fr) var(--bottom);
+  overflow: hidden;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+  min-width: 0;
+  z-index: 15;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 850;
+  letter-spacing: -0.6px;
+  font-size: 16px;
+  white-space: nowrap;
+}
+.brand-mark {
+  width: 29px;
+  height: 29px;
+  border: 1.5px solid var(--accent);
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  position: relative;
+}
+
+.project-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.project-crumb .path {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.15px;
+}
+.project-crumb .chev {
+  color: var(--muted-2);
+}
+.project-crumb .file {
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 6px;
+}
+
+.view-segment {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--panel-raised);
+}
