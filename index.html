@@ -1,130 +1,203 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PageForge</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./script.ts" defer></script>
-  </head>
-  <body>
-    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
-<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
-<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5"/></symbol>
-<symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-<symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V4h16v3M12 4v16M8 20h8"/></symbol>
-<symbol id="i-align" viewBox="0 0 24 24"><path d="M3 5h18M3 10h13M3 15h18M3 20h10"/></symbol>
-<symbol id="i-button" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="m10 10 3 2-3 2"/></symbol>
-<symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M10 9v12"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 16-5-5L5 21"/></symbol>
-<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
-<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
-<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
-<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M5 12h14"/></symbol>
-<symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6M3 13a9 9 0 1 1 3 6"/></symbol>
-<symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6M21 13a9 9 0 1 0-3 6"/></symbol>
-<symbol id="i-desktop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
-<symbol id="i-tablet" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></symbol>
-<symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 18v3h14v-3"/></symbol>
-<symbol id="i-cop" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
-<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
-<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
-<symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></symbol>
-<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></symbol>
-<symbol id="i-settings" viewBox="0 0 24 24"><path d="M10 3h4l1 3 2 1 3-1 2 4-2 2v2l2 2-2 4-3-1-2 1-1 3h-4l-1-3-2-1-3 1-2-4 2-2v-2l-2-2 2-4 3 1 2-1z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
-<symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-11-2 18"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
-</svg>
-    <main class="app">
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark"
-            ><svg>
-              <use href="#i-grid">
-              </use></svg></span
-          ><span class="wordmark">pageforge<span class="accent">.</span></span
-          ><span class="beta mono">BETA</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PageForge</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.ts" defer></script>
+</head>
+
+<body>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7" rx="1" />
+      <rect x="14" y="3" width="7" height="7" rx="1" />
+      <rect x="3" y="14" width="7" height="7" rx="1" />
+      <rect x="14" y="14" width="7" height="7" rx="1" />
+    </symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24">
+      <path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5" />
+    </symbol>
+    <symbol id="i-add" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" />
+    </symbol>
+    <symbol id="i-text" viewBox="0 0 24 24">
+      <path d="M4 7V4h16v3M12 4v16M8 20h8" />
+    </symbol>
+    <symbol id="i-align" viewBox="0 0 24 24">
+      <path d="M3 5h18M3 10h13M3 15h18M3 20h10" />
+    </symbol>
+    <symbol id="i-button" viewBox="0 0 24 24">
+      <rect x="3" y="7" width="18" height="10" rx="2" />
+      <path d="m10 10 3 2-3 2" />
+    </symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="1" />
+      <path d="M3 9h18M10 9v12" />
+    </symbol>
+    <symbol id="i-image" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="m21 16-5-5L5 21" />
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" />
+      <path
+        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m9 18 6-6-6-6" />
+    </symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="m12 19-7-7 7-7M5 12h14" />
+    </symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24">
+      <path d="M3 7v6h6M3 13a9 9 0 1 1 3 6" />
+    </symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24">
+      <path d="M21 7v6h-6M21 13a9 9 0 1 0-3 6" />
+    </symbol>
+    <symbol id="i-desktop" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="13" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+    </symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24">
+      <rect x="5" y="2" width="14" height="20" rx="2" />
+      <path d="M11 18h2" />
+    </symbol>
+    <symbol id="i-mobile" viewBox="0 0 24 24">
+      <rect x="7" y="2" width="10" height="20" rx="2" />
+      <path d="M11 18h2" />
+    </symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24">
+      <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" />
+      <circle cx="12" cy="12" r="3" />
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24">
+      <path d="M12 3v12m-5-5 5 5 5-5M5 18v3h14v-3" />
+    </symbol>
+    <symbol id="i-cop" viewBox="0 0 24 24">
+      <rect x="8" y="8" width="13" height="13" rx="2" />
+      <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+    </symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24">
+      <path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7" />
+    </symbol>
+    <symbol id="i-up" viewBox="0 0 24 24">
+      <path d="m6 14 6-6 6 6" />
+    </symbol>
+    <symbol id="i-down" viewBox="0 0 24 24">
+      <path d="m6 10 6 6 6-6" />
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M15 3v18" />
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="M10 3h4l1 3 2 1 3-1 2 4-2 2v2l2 2-2 4-3-1-2 1-1 3h-4l-1-3-2-1-3 1-2-4 2-2v-2l-2-2 2-4 3 1 2-1z" />
+      <circle cx="12" cy="12" r="3" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12 5 5L20 7" />
+    </symbol>
+    <symbol id="i-code" viewBox="0 0 24 24">
+      <path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-11-2 18" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M5 5l14 14M19 5 5 19" />
+    </symbol>
+  </svg>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark"><svg>
+            <use href="#i-grid">
+            </use>
+          </svg></span><span class="wordmark">pageforge<span class="accent">.</span></span><span
+          class="beta mono">BETA</span>
+      </div>
+      <div class="project-crumb">
+        <span class="path">WORKSPACE</span><span class="chev">/</span><span class="file">Landing / 01</span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn desktop-only" id="undoBtn" title="Отменить (Ctrl+Z)" aria-label="Отменить" disabled="">
+          <svg>
+            <use href="#i-undo"></use>
+          </svg>
+        </button>
+        <button class="icon-btn desktop-only" id="redoBtn" title="Повторить (Ctrl+Shift+Z)" aria-label="Повторить"
+          disabled="">
+          <svg>
+            <use href="#i-redo"></use>
+          </svg>
+        </button>
+        <div class="t-divider"></div>
+        <div class="view-segment" aria-label="Размер предпросмотра">
+          <button class="view-btn active" data-viewport="desktop" title="Desktop" aria-label="Десктоп">
+            <svg>
+              <use href="#i-desktop"></use>
+            </svg>
+          </button>
+          <button class="view-btn" data-viewport="tablet" title="Tablet" aria-label="Планшет">
+            <svg>
+              <use href="#i-tablet"></use>
+            </svg>
+          </button>
+          <button class="view-btn" data-viewport="mobile" title="Mobile" aria-label="Телефон">
+            <svg>
+              <use href="#i-mobile"></use>
+            </svg>
+          </button>
         </div>
-        <div class="project-crumb">
-          <span class="path">WORKSPACE</span><span class="chev">/</span
-          ><span class="file">Landing / 01</span>
+        <div class="t-divider"></div>
+        <button class="icon-btn" id="themeBtn" title="Сменить тему редактора" aria-label="Сменить тему редактора">
+          <svg aria-hidden="true">
+            <use href="#i-sun"></use>
+          </svg>
+        </button>
+        <button class="btn small desktop-only" id="previewBtn">
+          <svg>
+            <use href="#i-eye"></use>
+          </svg><span>Просмотр</span>
+        </button>
+        <button class="btn primary" id="exportBtn">
+          <svg>
+            <use href="#i-download"></use>
+          </svg><span>Экспорт</span>
+        </button>
+        <button class="icon-btn mobile-only" id="openRight" aria-label="Открыть свойства">
+          <svg>
+            <use href="#i-settings"></use>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <div class="workspace">
+      <aside class="leftPanel sidebar">
+        <div class="sidebar__header>
+          <h2>Редактор</h2><span class="side-count mono">V 0.1</span>
         </div>
-        <div class="top-actions">
-          <button
-            class="icon-btn desktop-only"
-            id="undoBtn"
-            title="Отменить (Ctrl+Z)"
-            aria-label="Отменить"
-            disabled=""
-          >
-            <svg><use href="#i-undo"></use></svg>
-          </button>
-          <button
-            class="icon-btn desktop-only"
-            id="redoBtn"
-            title="Повторить (Ctrl+Shift+Z)"
-            aria-label="Повторить"
-            disabled=""
-          >
-            <svg><use href="#i-redo"></use></svg>
-          </button>
-          <div class="t-divider"></div>
-          <div class="view-segment" aria-label="Размер предпросмотра">
-            <button
-              class="view-btn active"
-              data-viewport="desktop"
-              title="Desktop"
-              aria-label="Десктоп"
-            >
-              <svg><use href="#i-desktop"></use></svg>
-            </button>
-            <button
-              class="view-btn"
-              data-viewport="tablet"
-              title="Tablet"
-              aria-label="Планшет"
-            >
-              <svg><use href="#i-tablet"></use></svg>
-            </button>
-            <button
-              class="view-btn"
-              data-viewport="mobile"
-              title="Mobile"
-              aria-label="Телефон"
-            >
-              <svg><use href="#i-mobile"></use></svg>
-            </button>
-          </div>
-          <div class="t-divider"></div>
-          <button
-            class="icon-btn"
-            id="themeBtn"
-            title="Сменить тему редактора"
-            aria-label="Сменить тему редактора"
-          >
-            <svg aria-hidden="true"><use href="#i-sun"></use></svg>
-          </button>
-          <button class="btn small desktop-only" id="previewBtn">
-            <svg><use href="#i-eye"></use></svg><span>Просмотр</span>
-          </button>
-          <button class="btn primary" id="exportBtn">
-            <svg><use href="#i-download"></use></svg><span>Экспорт</span>
-          </button>
-          <button
-            class="icon-btn mobile-only"
-            id="openRight"
-            aria-label="Открыть свойства"
-          >
-            <svg><use href="#i-settings"></use></svg>
-          </button>
-        </div>
-      </header>
-      <h1>PageForge</h1>
-      <div class="game__list"></div>
-    </main>
-  </body>
+        <div class="sidebar__tabs"></div>
+        <div class="sidebar__ content"></div>
+        <div class="sidebar__footer"></div>
+      </aside>
+      <main class="canvasZone"></main>
+      <aside class="rightPanel sidebar">
+        <div class="siderbar__header"></div>
+        <div class="siderbar__content"></div>
+        <div class="siderbar__footer"></div>
+
+      </aside>
+    </div>
+  </div>
+</body>
+
 </html>
