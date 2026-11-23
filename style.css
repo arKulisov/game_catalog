@@ -213,3 +213,28 @@ svg {
   border-radius: 7px;
   background: var(--panel-raised);
 }
+
+.workspace {
+  --left: 248px;
+  --right: 248px;
+  display: grid;
+  grid-template-columns: var(--left) minmax(0, 1fr) var(--right);
+}
+
+.leftPanel {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  
+}
+
+.sidebar__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rightPanel {
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  overflow: hidden;
+}
