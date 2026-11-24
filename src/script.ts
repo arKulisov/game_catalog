@@ -57,7 +57,7 @@ const widgets = {
     inspector: {
       src: { type: "text", label: "URL изображения" },
       alt: { type: "text", label: "Альтернативный текст" },
-    }
+    },
   },
   button: {
     label: "Кнопка",
@@ -67,79 +67,23 @@ const widgets = {
     inspector: {
       text: { type: "textarea", label: "Текст" },
       tag: { type: "select", label: "HTML-тег" },
-    }
-  }
+    },
+  },
 };
 const widgetBar = document.querySelector<HTMLElement>(".sidebar__content");
 document.addEventListener("DOMContentLoaded", () => {
   if (!widgetBar) return;
   Object.entries(widgets).forEach(([type, widget]) => {
     const widgetElement = document.createElement("div");
-    widgetElement.classList.add('widget', 'is-active');
+    widgetElement.classList.add("widget", "is-active");
     widgetElement.title = widget.label;
     widgetElement.dataset.id = type;
     widgetBar.appendChild(widgetElement);
   });
 });
 
-let draggable = false;
-let widgetShadow: HTMLElement | null = null;
+const preview = document.querySelector<HTMLIFrameElement>("#preview");
 
-let offsetX = 0;
-let offsetY = 0;
-let currX = 0;
-let currY = 0;
-let widgetWdth = 0;
-let widgetHght = 0;
-
-widgetBar?.addEventListener('pointerdown', (e: PointerEvent) => {
-  if (!(e.target instanceof HTMLElement)) return;
-  const widget = e.target.closest('.widget');
-  if (!widget) return;
-  if (!(widget instanceof HTMLElement)) return;
-  let clone = widget.cloneNode(true);
-
-  if (!(clone instanceof HTMLElement)) return;
-  widgetShadow = clone;
-  widgetShadow.classList.add('widget__shadow', 'is-active',)
-  widget.classList.remove('is-active');
-  widget.classList.add('not-active');
-
-  if (!(widgetShadow instanceof HTMLElement)) return;
-  document.body.append(widgetShadow);
-  widgetShadow.classList.add('widget__shadow');
-
-  const rect = widget.getBoundingClientRect();
-  widgetWdth = rect.width;
-  widgetHght = rect.height;
-
-  offsetX = e.clientX - rect.left;
-  offsetY = e.clientY - rect.top;
-  coordinateClone(e);
-  draggable = true;
-});
-
-document.addEventListener('pointermove', (e: PointerEvent) => {
-  if (!draggable) return;
-  if (!(widgetShadow instanceof HTMLElement)) return;
-  coordinateClone(e)
-})
-
-function coordinateClone(e: PointerEvent) {
-  if (!(widgetShadow instanceof HTMLElement)) return;
-  currX = e.clientX - offsetX;
-  currY = e.clientY - offsetY;
-  widgetShadow.style.left = currX + 'px';
-  widgetShadow.style.top = currY + 'px';
-  widgetShadow.style.width = widgetWdth + 'px';
-  widgetShadow.style.height = widgetHght + 'px';
-}
-
-document.addEventListener('pointerup', (e: PointerEvent) => {
-  draggable = false
-});
-
-const preview = document.querySelector<HTMLIFrameElement>('#preview');
 if (preview instanceof HTMLIFrameElement) {
   preview.srcdoc = `
   <!DOCTYPE html>
@@ -155,3 +99,77 @@ if (preview instanceof HTMLIFrameElement) {
 `;
 }
 
+
+preview?.addEventListener("load", () => {
+  let doc: Document | null = null;
+  let placeholder: Element | null = null;
+  doc = preview?.contentDocument;
+  placeholder = doc?.querySelector<Element>(".editor__placeholder") ?? null;
+;
+  if (!placeholder) return;
+  placeholder.addEventListener("pointerenter", () => {
+    console.log("pointerenter сработал");
+    placeholder.classList.add("is-over");
+  });
+
+  placeholder.addEventListener("pointerleave", () => {
+    placeholder.classList.remove("is-over");
+  });
+});
+
+let draggable = false;
+let widgetShadow: HTMLElement | null = null;
+
+let offsetX = 0;
+let offsetY = 0;
+let currX = 0;
+let currY = 0;
+let widgetWdth = 0;
+let widgetHght = 0;
+
+widgetBar?.addEventListener("pointerdown", (e: PointerEvent) => {
+  if (!(e.target instanceof HTMLElement)) return;
+  const widget = e.target.closest(".widget");
+  if (!widget) return;
+  if (!(widget instanceof HTMLElement)) return;
+  let clone = widget.cloneNode(true);
+
+  if (!(clone instanceof HTMLElement)) return;
+  widgetShadow = clone;
+  widgetShadow.classList.add("widget__shadow", "is-active");
+  widget.classList.remove("is-active");
+  widget.classList.add("not-active");
+
+  if (!(widgetShadow instanceof HTMLElement)) return;
+  document.body.append(widgetShadow);
+  widgetShadow.classList.add("widget__shadow");
+
+  const rect = widget.getBoundingClientRect();
+  widgetWdth = rect.width;
+  widgetHght = rect.height;
+
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+  coordinateClone(e);
+  draggable = true;
+});
+
+document.addEventListener("pointermove", (e: PointerEvent) => {
+  if (!draggable) return;
+  if (!(widgetShadow instanceof HTMLElement)) return;
+  coordinateClone(e);
+});
+
+function coordinateClone(e: PointerEvent) {
+  if (!(widgetShadow instanceof HTMLElement)) return;
+  currX = e.clientX - offsetX;
+  currY = e.clientY - offsetY;
+  widgetShadow.style.left = currX + "px";
+  widgetShadow.style.top = currY + "px";
+  widgetShadow.style.width = widgetWdth + "px";
+  widgetShadow.style.height = widgetHght + "px";
+}
+
+document.addEventListener("pointerup", (e: PointerEvent) => {
+  draggable = false;
+});
