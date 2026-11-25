@@ -278,7 +278,8 @@ svg {
   border-radius: 10px;
   width: 100%;
   height: 100px;
-  position: fixed
+  position: fixed;
+  pointer-events: none;
 }
 
 .is-active {

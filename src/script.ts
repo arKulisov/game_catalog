@@ -31,7 +31,7 @@ const elementCreators = {
 const widgets = {
   container: {
     label: "Контейнер",
-    icon: "container-icon",
+    tag: "div",
     canHaveChildren: true,
     defaultStyles: { base: { display: "flex", flexDirection: "column" } },
     inspector: {
@@ -41,7 +41,6 @@ const widgets = {
   },
   text: {
     label: "Текст",
-    icon: "text-icon",
     canHaveChildren: false,
     defaultStyles: { base: { display: "block" } },
     inspector: {
@@ -51,7 +50,6 @@ const widgets = {
   },
   img: {
     label: "Изображение",
-    icon: "image-icon",
     canHaveChildren: false,
     defaultStyles: { base: { display: "block" } },
     inspector: {
@@ -61,7 +59,7 @@ const widgets = {
   },
   button: {
     label: "Кнопка",
-    icon: "button-icon",
+    tag: "button",
     canHaveChildren: false,
     defaultStyles: { base: { display: "block" } },
     inspector: {
@@ -82,7 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+
 const preview = document.querySelector<HTMLIFrameElement>("#preview");
+let doc: Document | null = null;
+let placeholder: Element | null = null;
+
+preview?.addEventListener("load", () => {
+
+  doc = preview?.contentDocument;
+  placeholder = doc?.querySelector<Element>(".editor__placeholder") ?? null;
+  if (!placeholder) return;
+
+});
+
 
 if (preview instanceof HTMLIFrameElement) {
   preview.srcdoc = `
@@ -98,24 +109,6 @@ if (preview instanceof HTMLIFrameElement) {
   </html>
 `;
 }
-
-
-preview?.addEventListener("load", () => {
-  let doc: Document | null = null;
-  let placeholder: Element | null = null;
-  doc = preview?.contentDocument;
-  placeholder = doc?.querySelector<Element>(".editor__placeholder") ?? null;
-;
-  if (!placeholder) return;
-  placeholder.addEventListener("pointerenter", () => {
-    console.log("pointerenter сработал");
-    placeholder.classList.add("is-over");
-  });
-
-  placeholder.addEventListener("pointerleave", () => {
-    placeholder.classList.remove("is-over");
-  });
-});
 
 let draggable = false;
 let widgetShadow: HTMLElement | null = null;
@@ -150,7 +143,9 @@ widgetBar?.addEventListener("pointerdown", (e: PointerEvent) => {
 
   offsetX = e.clientX - rect.left;
   offsetY = e.clientY - rect.top;
+
   coordinateClone(e);
+  if (preview) preview.style.pointerEvents = "none";
   draggable = true;
 });
 
@@ -158,6 +153,18 @@ document.addEventListener("pointermove", (e: PointerEvent) => {
   if (!draggable) return;
   if (!(widgetShadow instanceof HTMLElement)) return;
   coordinateClone(e);
+
+  if (!preview) return;
+  if (!doc) return;
+
+  const rect = preview.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const el = doc.elementFromPoint(x, y);
+  const isOver = !!el?.closest(".editor__placeholder");
+
+  placeholder?.classList.toggle("is-over", isOver);
 });
 
 function coordinateClone(e: PointerEvent) {
@@ -169,7 +176,19 @@ function coordinateClone(e: PointerEvent) {
   widgetShadow.style.width = widgetWdth + "px";
   widgetShadow.style.height = widgetHght + "px";
 }
-
 document.addEventListener("pointerup", (e: PointerEvent) => {
+  if (!draggable) return;
+  if (!(e.target instanceof HTMLElement)) return;
+  if (!(widgetShadow instanceof HTMLElement)) return;
+
+  const id = widgetShadow.dataset.id;
+  if (!id) return;
+  if (!(id in widgets)) return;
+  if (!(id in elementCreators)) return;
+
+  const element = elementCreators[id as keyof typeof elementCreators]();
+  doc?.body.append(element);
+
+
   draggable = false;
 });
