@@ -1,7 +1,14 @@
-function renderNode(node, parent) {
-    const element = elementCreators[node.type]();
+function renderNode(id, parent) {
+    const node = widgets[id];
+    const tag = node.tag || "div";
+    const element = document.createElement(tag);
+    placeholder?.remove();
+    widgetShadow?.remove();
     if (parent) {
         parent.appendChild(element);
+    }
+    else {
+        doc?.body.appendChild(element);
     }
     return element;
 }
@@ -24,6 +31,7 @@ const widgets = {
     },
     text: {
         label: "Текст",
+        tag: "p",
         canHaveChildren: false,
         defaultStyles: { base: { display: "block" } },
         inspector: {
@@ -33,6 +41,7 @@ const widgets = {
     },
     img: {
         label: "Изображение",
+        tag: "img",
         canHaveChildren: false,
         defaultStyles: { base: { display: "block" } },
         inspector: {
@@ -44,7 +53,7 @@ const widgets = {
         label: "Кнопка",
         tag: "button",
         canHaveChildren: false,
-        defaultStyles: { base: { display: "block" } },
+        defaultStyles: { base: { display: "block", width: '200px', height: '40px' } },
         inspector: {
             text: { type: "textarea", label: "Текст" },
             tag: { type: "select", label: "HTML-тег" },
@@ -164,8 +173,7 @@ document.addEventListener("pointerup", (e) => {
         return;
     if (!(id in elementCreators))
         return;
-    const element = elementCreators[id]();
-    doc?.body.append(element);
+    renderNode(id, null);
     draggable = false;
 });
 export {};

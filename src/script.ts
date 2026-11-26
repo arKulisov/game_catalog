@@ -16,15 +16,24 @@ function renderNode(id: NodeType, parent: HTMLElement | null): HTMLElement {
   const node = widgets[id as keyof typeof widgets];
   const tag = node.tag || "div";
   const element = document.createElement(tag);
-
+  const elementId = crypto.randomUUID();
+  element.classList.add(id, elementId);
+  
+  let styles: string | null = null;
+  if (previewStyle) {
+    styles = Object.entries(node.defaultStyles).map(([breakpoint, cssProps]) => {
+      `${breakpoint}: ${Object.entries(cssProps).map(([prop, value]) => `${prop}: ${value};`).join(" ")}`
+    }).join(" ");
+  }
   if (parent) {
     parent.appendChild(element);
   } else {
     doc?.body.appendChild(element);
   }
 
+  placeholder?.remove();
+  widgetShadow?.remove();
   return element;
-
 }
 
 const elementCreators = {
@@ -69,7 +78,7 @@ const widgets = {
     label: "Кнопка",
     tag: "button",
     canHaveChildren: false,
-    defaultStyles: { base: { display: "block" } },
+    defaultStyles: { base: { display: "block", width: '200px', height: '40px' } },
     inspector: {
       text: { type: "textarea", label: "Текст" },
       tag: { type: "select", label: "HTML-тег" },
@@ -93,11 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
 const preview = document.querySelector<HTMLIFrameElement>("#preview");
 let doc: Document | null = null;
 let placeholder: Element | null = null;
+let previewStyle: HTMLStyleElement | null = null;
 
 preview?.addEventListener("load", () => {
 
   doc = preview?.contentDocument;
-  placeholder = doc?.querySelector<Element>(".editor__placeholder") ?? null;
+  if (!doc) return;
+  placeholder = doc.querySelector<Element>(".editor__placeholder") ?? null;
+  previewStyle = doc.head.querySelector('style');
   if (!placeholder) return;
 
 });
@@ -192,7 +204,6 @@ document.addEventListener("pointerup", (e: PointerEvent) => {
   const id = widgetShadow.dataset.id;
   if (!id) return;
   if (!(id in widgets)) return;
-  if (!(id in elementCreators)) return;
 
   renderNode(id as NodeType, null);
 
