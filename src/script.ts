@@ -11,14 +11,20 @@ interface PageNode {
   children: Array<PageNode>;
 }
 
-function renderNode(node: PageNode, parent: HTMLElement | null): HTMLElement {
-  const element = elementCreators[node.type]();
+function renderNode(id: NodeType, parent: HTMLElement | null): HTMLElement {
+
+  const node = widgets[id as keyof typeof widgets];
+  const tag = node.tag || "div";
+  const element = document.createElement(tag);
 
   if (parent) {
     parent.appendChild(element);
+  } else {
+    doc?.body.appendChild(element);
   }
 
   return element;
+
 }
 
 const elementCreators = {
@@ -41,6 +47,7 @@ const widgets = {
   },
   text: {
     label: "Текст",
+    tag: "p",
     canHaveChildren: false,
     defaultStyles: { base: { display: "block" } },
     inspector: {
@@ -50,6 +57,7 @@ const widgets = {
   },
   img: {
     label: "Изображение",
+    tag: "img",
     canHaveChildren: false,
     defaultStyles: { base: { display: "block" } },
     inspector: {
@@ -186,9 +194,7 @@ document.addEventListener("pointerup", (e: PointerEvent) => {
   if (!(id in widgets)) return;
   if (!(id in elementCreators)) return;
 
-  const element = elementCreators[id as keyof typeof elementCreators]();
-  doc?.body.append(element);
-
+  renderNode(id as NodeType, null);
 
   draggable = false;
 });
