@@ -1,5 +1,8 @@
+:root {
+  --dash-color: #888;
+}
 .editor__placeholder {
-    --dash-color: #888;
+
     width: 100%;
     height: 380px;
     background:
@@ -14,4 +17,15 @@
 
 .is-over {
   --dash-color: black;
+}
+
+.active__element {
+  background: 
+  repeating-linear-gradient(to right, var(--dash-color) 0 10px, transparent 10px 15px) top,
+    repeating-linear-gradient(to right, var(--dash-color) 0 10px, transparent 10px 15px) bottom,
+    repeating-linear-gradient(to bottom, var(--dash-color) 0 10px, transparent 10px 15px) left,
+    repeating-linear-gradient(to bottom, var(--dash-color) 0 10px, transparent 10px 15px) right;
+
+  background-size: 100% 2px, 100% 2px, 2px 100%, 2px 100%;
+  background-repeat: no-repeat;
 }
